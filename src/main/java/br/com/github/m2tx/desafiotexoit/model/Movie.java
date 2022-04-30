@@ -18,21 +18,21 @@ public class Movie {
 	@Column(name = "title")
 	private String title;
 	@Column(name = "year")
-	private long year;
-	@Column(name = "producer")
-	private String producer;
-	@Column(name = "studio")
-	private String studio;
+	private Integer year;
+	@Column(name = "producers")
+	private String producers;
+	@Column(name = "studios")
+	private String studios;
 	@Column(name = "winner")
 	private boolean winner;
 	
 	public Movie() {}
 	
-	public Movie(String title, String producer, String studio, long year, boolean winner) {
+	public Movie(String title, String producers, String studios, Integer year, boolean winner) {
 		super();
 		this.title = title;
-		this.producer = producer;
-		this.studio = studio;
+		this.producers = producers;
+		this.studios = studios;
 		this.year = year;
 		this.winner = winner;
 	}
@@ -41,19 +41,19 @@ public class Movie {
 		return id;
 	}
 	
-	public String getProducer() {
-		return producer;
+	public String getProducers() {
+		return producers;
 	}
 	
-	public String getStudio() {
-		return studio;
+	public String getStudios() {
+		return studios;
 	}
 	
 	public String getTitle() {
 		return title;
 	}
 	
-	public long getYear() {
+	public Integer getYear() {
 		return year;
 	}
 	
@@ -65,12 +65,12 @@ public class Movie {
 		this.id = id;
 	}
 	
-	public void setProducer(String producer) {
-		this.producer = producer;
+	public void setProducers(String producers) {
+		this.producers = producers;
 	}
 	
-	public void setStudio(String studio) {
-		this.studio = studio;
+	public void setStudios(String studios) {
+		this.studios = studios;
 	}
 	
 	public void setTitle(String title) {
@@ -81,7 +81,7 @@ public class Movie {
 		this.winner = winner;
 	}
 	
-	public void setYear(long year) {
+	public void setYear(Integer year) {
 		this.year = year;
 	}
 }

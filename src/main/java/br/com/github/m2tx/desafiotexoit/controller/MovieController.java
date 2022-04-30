@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.com.github.m2tx.desafiotexoit.dto.AwardsInterval;
 import br.com.github.m2tx.desafiotexoit.model.Movie;
 import br.com.github.m2tx.desafiotexoit.service.MovieService;
 
@@ -54,8 +55,8 @@ public class MovieController {
 		return ResponseEntity.ok(service.findById(id)
 		.map(movie -> {
 			movie.setTitle(newMovie.getTitle());
-			movie.setProducer(newMovie.getProducer());
-			movie.setStudio(newMovie.getStudio());
+			movie.setProducers(newMovie.getProducers());
+			movie.setStudios(newMovie.getStudios());
 			movie.setYear(newMovie.getYear());
 			movie.setWinner(newMovie.isWinner());
 			return service.save(movie);
@@ -68,5 +69,10 @@ public class MovieController {
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
 		service.deleteById(id);
+	}
+	
+	@GetMapping("/awards/interval/")
+	public ResponseEntity<AwardsInterval> awardsInterval(){
+		return ResponseEntity.ok(service.awardsInterval());
 	}
 }

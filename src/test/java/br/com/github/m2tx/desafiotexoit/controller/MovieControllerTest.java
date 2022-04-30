@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -24,7 +23,6 @@ import br.com.github.m2tx.desafiotexoit.model.Movie;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@Sql("movie-test.sql")
 public class MovieControllerTest {
 	
 	@Autowired
@@ -76,6 +74,14 @@ public class MovieControllerTest {
 	@Test
 	public void deleteMovie() throws JsonProcessingException, Exception {
 		this.mockMvc.perform(delete("/movies/3"))
+				.andDo(print())
+				.andExpect(status().isOk());
+	}
+	
+	@Test
+	public void returnProducerMinAndMaxIntervalAwards() throws JsonProcessingException, Exception {
+		this.mockMvc.perform(get("/movies/awards/interval/")
+				.contentType(MediaType.APPLICATION_JSON))
 				.andDo(print())
 				.andExpect(status().isOk());
 	}

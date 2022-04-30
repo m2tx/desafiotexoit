@@ -38,8 +38,8 @@ public class MovieListRunner implements ApplicationRunner {
 			Map<String, String> mapping = new HashMap<String, String>();
 			mapping.put("title", "title");
 			mapping.put("year", "year");
-			mapping.put("producers", "producer");
-			mapping.put("studios", "studio");
+			mapping.put("producers", "producers");
+			mapping.put("studios", "studios");
 			mapping.put("winner", "winner");
 			HeaderColumnNameTranslateMappingStrategy<Movie> mappingStrategy = new HeaderColumnNameTranslateMappingStrategy<Movie>();
 			mappingStrategy.setType(Movie.class);
