@@ -23,10 +23,10 @@
 
 ## H2 Console
 
-| URL | [http://localhost:8080/h2-console](http://localhost:8080/h2-console) |
-| DATABASE | jdbc:h2:mem:desafiotexoit |
-| USERNAME | sa |
-| PASSWORD | password |
+- URL = [http://localhost:8080/h2-console](http://localhost:8080/h2-console)
+- DATABASE = jdbc:h2:mem:desafiotexoit
+- USERNAME = sa
+- PASSWORD = password
 
 ## Movie List
 - ./resources/movielist.csv 
