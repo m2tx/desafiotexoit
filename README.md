@@ -9,16 +9,18 @@
 | DELETE | /movies/{id} |
 | GET | /moveis/awards/interval/ |
 
-## Compile application
+## Compile
 
 ```
 	mvn package
 ```
 
-## Run application
+## Execute
+
 
 ```
-	java -jar ./target/desafiotexoit-0.0.1.jar
+	java -jar ./target/desafiotexoit-0.0.1.jar --movielist=./src/main/resources/movielist.csv
+	curl http://localhost:8080/movies/awards/interval/
 ```
 
 ## H2 Console
@@ -27,8 +29,3 @@
 - DATABASE = jdbc:h2:mem:desafiotexoit
 - USERNAME = sa
 - PASSWORD = password
-
-## Movie List
-- ./resources/movielist.csv 
-
-
