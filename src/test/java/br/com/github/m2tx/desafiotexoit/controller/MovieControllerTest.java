@@ -24,65 +24,77 @@ import br.com.github.m2tx.desafiotexoit.model.Movie;
 @SpringBootTest
 @AutoConfigureMockMvc
 public class MovieControllerTest {
-	
+
 	@Autowired
 	private MockMvc mockMvc;
-	
+
 	@Autowired
 	private ObjectMapper mapper;
-	
+
 	@Test
 	public void returnAllMovies() throws JsonProcessingException, Exception {
 		this.mockMvc.perform(get("/movies")
 				.contentType(MediaType.APPLICATION_JSON))
-				.andDo(print())
-				.andExpect(status().isOk())
-				.andExpect(jsonPath("$").isArray())
-				.andExpect(jsonPath("$").isNotEmpty());
+		.andDo(print())
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$").isArray())
+		.andExpect(jsonPath("$").isNotEmpty());
 	}
-	
+
 	@Test
 	public void returnMovieWithIdOne() throws JsonProcessingException, Exception {
 		this.mockMvc.perform(get("/movies/1")
 				.contentType(MediaType.APPLICATION_JSON))
-				.andDo(print())
-				.andExpect(status().isOk())
-				.andExpect(jsonPath("$.id").value(1));
+		.andDo(print())
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$.id").value(1));
 	}
-	
+
 	@Test
 	public void saveMovie() throws JsonProcessingException, Exception {
 		this.mockMvc.perform(post("/movies")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(mapper.writeValueAsString(new Movie("Title 1","Producer 1","Studio 1",1972,true))))
-				.andDo(print())
-				.andExpect(status().isCreated())
-				.andExpect(jsonPath("$.id").value(any(Integer.class)));
+		.andDo(print())
+		.andExpect(status().isCreated())
+		.andExpect(jsonPath("$.id").value(any(Integer.class)));
 	}
-	
+
 	@Test
 	public void updateMovie() throws JsonProcessingException, Exception {
 		this.mockMvc.perform(put("/movies/2")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(mapper.writeValueAsString(new Movie("Title Updated","Producer Updated","Studio Updated",1984,false))))
-				.andDo(print())
-				.andExpect(status().isOk())
-				.andExpect(jsonPath("$.id").value(2))
-				.andExpect(jsonPath("$.title").value("Title Updated"));
+		.andDo(print())
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$.id").value(2))
+		.andExpect(jsonPath("$.title").value("Title Updated"));
 	}
-	
+
 	@Test
 	public void deleteMovie() throws JsonProcessingException, Exception {
 		this.mockMvc.perform(delete("/movies/3"))
-				.andDo(print())
-				.andExpect(status().isOk());
+		.andDo(print())
+		.andExpect(status().isOk());
 	}
-	
+
 	@Test
 	public void returnProducerMinAndMaxIntervalAwards() throws JsonProcessingException, Exception {
 		this.mockMvc.perform(get("/movies/awards/interval/")
 				.contentType(MediaType.APPLICATION_JSON))
 				.andDo(print())
-				.andExpect(status().isOk());
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.min").isArray())
+				.andExpect(jsonPath("$.min").isNotEmpty())
+				.andExpect(jsonPath("$.min.[0].producer").value("Joel Silver"))
+				.andExpect(jsonPath("$.min.[0].interval").value(1))
+				.andExpect(jsonPath("$.min.[0].previousWin").value(1990))
+				.andExpect(jsonPath("$.min.[0].followingWin").value(1991))
+				.andExpect(jsonPath("$.max").isArray())
+				.andExpect(jsonPath("$.max").isNotEmpty())
+				.andExpect(jsonPath("$.max.[0].producer").value("Matthew Vaughn"))
+				.andExpect(jsonPath("$.max.[0].interval").value(13))
+				.andExpect(jsonPath("$.max.[0].previousWin").value(2002))
+				.andExpect(jsonPath("$.max.[0].followingWin").value(2015));
 	}
 }
