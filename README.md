@@ -7,7 +7,7 @@
 | POST | /movies |
 | PUT | /movies/{id} |
 | DELETE | /movies/{id} |
-| GET | /moveis/awards/interval/ |
+| GET | /movies/awards/interval/ |
 
 ## Compile
 
